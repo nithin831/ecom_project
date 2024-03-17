@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cart_tag %}
+{% block content %}
+
+<!-- Thank You area start -->
+<div class="page-banner-area page-banner-height-2" data-background="{% static 'assets/img/banner/page-banner-4.jpg'%}">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="page-banner-content text-center">
+                    <h4 class="breadcrumb-title">Thank You</h4>
+                    <div class="breadcrumb-two">
+                        <nav>
+                           <nav class="breadcrumb-trail breadcrumbs">
+                              <ul class="breadcrumb-menu">
+                                 <li class="breadcrumb-trail">
+                                    <a href="{% url 'home' %}"><span>Home</span></a>
+                                 </li>
+                                 <li class="trail-item">
+                                    <span>ThankYou</span>
+                                 </li>
+                              </ul>
+                           </nav> 
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+{% comment %} <div class="thank-you-area">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-8">
+                <div class="inner_complated">
+                    <div class="img_cmpted"><img src="{% static 'assets/img/payment_sucess.gif'%}" alt=""></div>
+                    <h4>Thank you for ordering in our store. You will receive a confirmation
+                        email shortly.</h4>
+                    <div class="btn_cmpted">
+                        <a href="{% url 'product' %}" class="btn btn-primary btn-lg btn-block" title="Go To Shop">Continue Shopping </a>
+                    </div>
+                </div>
+                <div class="main_quickorder text-align-center">
+                    <h3 class="title">Call Us for Any Query</h3>
+                    <div class="cntct typewriter-effect"><span class="call_desk"><a href="tel:+01234567890" id="typewriter_num">01 234 567 890</a></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+
+<div class="error-area pt-80 pb-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="error-info text-center">
+                    <div class="error-image text-center mb-50">
+                        <img src="{% static 'assets/img/payment_sucess.gif'%}" alt="">
+                    </div>
+                    <div class="error-content">
+                        <h4>Thank you for ordering in our store. You will receive a confirmation
+                            email shortly.</h4>
+                        <div class="btn_cmpted">
+                            <a href="{% url 'product' %}" class="btn btn-primary btn-lg btn-block" title="Go To Shop">Continue Shopping </a>
+                        </div>
+                        <br>
+                        <h3 class="title">Call Us for Any Query</h3>
+                        <div class="cntct typewriter-effect"><span class="call_desk"><a href="tel:+01234567890" id="typewriter_num">01 234 567 890</a></span></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Thank You area end -->
+
+{% endblock content %}
+    

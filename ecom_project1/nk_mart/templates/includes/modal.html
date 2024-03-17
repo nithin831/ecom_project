@@ -1,0 +1,122 @@
+
+{% load static %}
+{% load cart_tag %}
+
+<div class="col-xl-4 col-lg-5 col-md-8 col-sm-8">
+    <div class="header-action">
+
+        {% if user.is_authenticated %}
+        
+        <div class="block-userlink">
+            <a class="icon-link" href="{% url 'profile' %}">
+            <i class="flaticon-user"></i>
+            <span class="text">
+            <span class="sub">Logout </span>
+            My Profile </span>
+            </a>
+        </div>
+        {% else %}
+        
+        <div class="block-userlink">
+            <a class="icon-link" href="{% url 'login' %}">
+            <i class="flaticon-user"></i>
+            <span class="text">
+            <span class="sub">Login </span>
+            My Account </span>
+            </a>
+        </div>
+
+        {% endif %}
+        
+        <div class="block-wishlist action">
+            <a class="icon-link" href="{% url 'wishlist' %}">
+            <i class="flaticon-heart"></i>
+            <span class="count">{{wish_count}}</span>
+            <span class="text">
+            <span class="sub">Favorite</span>
+            My Wishlist </span>
+            </a>
+        </div>
+        <div class="block-cart action">
+            <a class="icon-link" href="{% url 'cart_detail' %}">
+            <i class="flaticon-shopping-bag"></i>
+            <span class="count">{{request.session.cart|length}}</span>
+            <span class="text">
+            <span class="sub">Your Cart:</span>
+            &#8377;{{cart_total_amount}} </span>
+            </a>
+            <div class="cart">
+                <div class="cart__mini">
+                    <ul>
+                        <li>
+                          <div class="cart__title">
+                            <h4>Your Cart</h4>
+                            <span>({{request.session.cart|length}} Item in Cart)</span>
+                          </div>
+                        </li>
+
+
+                        {% if request.session.cart|length < 1 %}
+
+                        <!-- Empty Cart area start -->
+                        <div class="empty-cart-area pb-100px pt-100px">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                      
+                                        <div class="empty-text-contant text-center">
+                                            <img src="{% static 'assets/img/empty_cart_modal.png' %}" height = "200px">
+                                            <br>
+                                            <a class="empty-cart-btn" href="{% url 'product' %}">
+                                                <i class="fa fa-arrow-left"> </i> Continue shopping
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Empty Cart area end -->
+
+                        {% else %}
+                        {% for key,value in request.session.cart.items %}
+
+                        <li>
+                          <div class="cart__item d-flex justify-content-between align-items-center">
+                            <div class="cart__inner d-flex">
+                              <div class="cart__thumb">
+                                <a href="/product">
+                                  <img src="{{value.featured_image}}" alt="">
+                                </a>
+                              </div>
+                              <div class="cart__details">
+                                <h6><a href="/product"> {{value.product_name|truncatewords:10}} </a></h6>
+                                <div class="cart__price">
+                                  <span>&#x20B9;{{value.price}}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="cart__del">
+                                <a href="{% url 'item_clear' key %}"><i class="fal fa-times"></i></a>
+                            </div>
+                          </div>
+                        </li>
+
+                        {% endfor %}
+                        {% endif %}
+
+                        <li>
+                          <div class="cart__sub d-flex justify-content-between align-items-center">
+                            <h6>Subtotal</h6>
+                            <span class="cart__sub-total">&#x20B9;{{cart_total_amount}}</span>
+                          </div>
+                        </li>
+                        <li>
+                            <a href="{% url 'cart_detail' %}" class="wc-cart mb-10">View cart</a>
+                            
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

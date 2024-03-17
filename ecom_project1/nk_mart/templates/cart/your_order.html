@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cart_tag %}
+{% block content %}
+
+
+<div class="page-banner-area page-banner-height-2" data-background="{% static 'assets/img/banner/page-banner-4.jpg'%}">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="page-banner-content text-center">
+                    <h4 class="breadcrumb-title">Your Order</h4>
+                    <div class="breadcrumb-two">
+                        <nav>
+                           <nav class="breadcrumb-trail breadcrumbs">
+                              <ul class="breadcrumb-menu">
+                                 <li class="breadcrumb-trail">
+                                    <a href="{% url 'home' %}"><span>Home</span></a>
+                                 </li>
+                                 <li class="trail-item">
+                                    <span>Your Order</span>
+                                 </li>
+                              </ul>
+                           </nav> 
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<!-- Cart Area Start -->
+
+{% if  order_item|length < 1 %}
+<div  style= "margin-left:500px">
+<img src="{% static 'assets/img/no_data1.gif' %}" height = "600px">
+</div>
+{% else %} 
+<div class="cart-main-area pt-100px pb-100px">
+    <div class="container">
+       
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <form action="#">
+                    <div class="table-content table-responsive cart-table-content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Image</th>
+                                    <th>Product Name</th>
+                                    <th>Unit Price</th>
+                                    <th>Qty</th>
+                                    <th>Subtotal</th>
+                                    {% comment %} <th>Cancle</th> {% endcomment %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                
+                                {% for i in order_item %}
+                                
+                                {% if i.order.paid %}
+                                  
+                                <tr>
+                                    <td class="product-name"><a >{{i.order.date}}</a></td>
+
+                                    <td class="product-thumbnail">
+                                        <a href="{% url 'product' %}"><img class="img-responsive ml-15px" src="{{i.image}}" alt="" /></a>
+                                    </td>
+                                    <td class="product-name"><a href="{% url 'product' %}">{{i.product|truncatechars:20}}</a></td>
+                                    <td class="product-price-cart"><span class="amount">&#8377; {{i.price}}</span></td>
+                                    <td class="product-quantity">
+                                        <div class="cart">
+                                            {{i.quantity}}
+                                        </div>
+                                    </td>
+                                    <td class="product-subtotal">&#8377; {{i.total}}</td>
+                                    {% comment %} <td class="product-remove">
+                                        
+                                        <a href="{% for key,value in request.session.cart.items %}{% url 'item_clear' key %} {% endfor %}"><i class="fa fa-times"></i></a>
+                                    </td>  {% endcomment %}
+                                </tr>
+                                    
+                                {% endif %}
+                                {% endfor %}
+                               
+                                    
+                            </tbody>
+                        </table>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% comment %} {% include "pagination/pagination.html" with page=order_item %} {% endcomment %}
+<br>
+<!-- Cart Area End -->
+
+{% endblock content %}
